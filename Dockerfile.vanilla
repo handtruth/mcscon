@@ -10,7 +10,6 @@ RUN [ "bash", "setup" ]
 FROM base AS vanilla
 RUN mkdir /server && mkdir /data
 COPY --from=download /server.jar /server
-ENV SERVER_VERSION=${SERVER_VERSION}
 WORKDIR /data
 VOLUME /data
 EXPOSE 25565/tcp 25565/udp 25575/tcp

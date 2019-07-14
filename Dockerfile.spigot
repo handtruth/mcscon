@@ -1,0 +1,18 @@
+ARG SERVER_VERSION=1.14.3
+FROM openjdk:8-jdk AS build
+ARG SERVER_VERSION
+RUN apt update && apt install -y git && mkdir -p /spigot
+WORKDIR /spigot
+RUN curl -fsSL -o BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar \
+    && git config --global --unset core.autocrlf || true
+RUN java -jar /spigot/BuildTools.jar --rev ${SERVER_VERSION}
+
+FROM openjdk:8-jre AS spigot
+ARG SERVER_VERSION
+RUN mkdir /server && mkdir /data
+COPY --from=build /spigot/spigot-${SERVER_VERSION}.jar /server/server.jar
+WORKDIR /data
+VOLUME /data
+EXPOSE 25565/tcp 25565/udp 25575/tcp
+LABEL maintainer="ktlo@handtruth.com"
+ENTRYPOINT umask 002 && java $JAVA_ARGS -jar /server/server.jar nogui
