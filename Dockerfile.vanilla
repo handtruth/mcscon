@@ -1,0 +1,18 @@
+FROM openjdk:8-jre AS base
+
+FROM base AS download
+ARG SERVER_VERSION=1.14.3
+RUN apt update && apt install -y jq
+COPY setup-vanilla.sh /setup
+ENV SERVER_VERSION=${SERVER_VERSION}
+RUN [ "bash", "setup" ]
+
+FROM base AS vanilla
+RUN mkdir /server && mkdir /data
+COPY --from=download /server.jar /server
+ENV SERVER_VERSION=${SERVER_VERSION}
+WORKDIR /data
+VOLUME /data
+EXPOSE 25565/tcp 25565/udp 25575/tcp
+LABEL maintainer="ktlo@handtruth.com"
+ENTRYPOINT umask 002 && java $JAVA_ARGS -jar /server/server.jar nogui
