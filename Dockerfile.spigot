@@ -3,8 +3,7 @@ FROM openjdk:8-jdk AS build
 ARG SERVER_VERSION
 RUN apt update && apt install -y git && mkdir -p /spigot
 WORKDIR /spigot
-RUN curl -fsSL -o BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar \
-    && git config --global --unset core.autocrlf || true
+RUN curl -fsSL -o BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
 RUN java -jar /spigot/BuildTools.jar --rev ${SERVER_VERSION}
 
 FROM openjdk:8-jre AS spigot
