@@ -1,6 +1,6 @@
 FROM openjdk:8-jre
 
-ARG SERVER_VERSION=1.14.3
+ARG SERVER_VERSION=1.14.4
 
 RUN apt update && apt install -y jq
 

@@ -1,4 +1,4 @@
-ARG SERVER_VERSION=1.14.3
+ARG SERVER_VERSION=1.14.4
 FROM openjdk:8-jdk AS build
 ARG SERVER_VERSION
 RUN apt update && apt install -y git && mkdir -p /spigot

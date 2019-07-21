@@ -1,7 +1,7 @@
 FROM openjdk:8-jre AS base
 
 FROM base AS download
-ARG SERVER_VERSION=1.14.3
+ARG SERVER_VERSION=1.14.4
 RUN apt update && apt install -y jq
 COPY setup-vanilla.sh /setup
 ENV SERVER_VERSION=${SERVER_VERSION}
