@@ -5,7 +5,7 @@ ARG SERVER_VERSION=1.14.4
 RUN apt update && apt install -y jq
 
 ADD start.sh setup-vanilla.sh /
-ENTRYPOINT [ "/start.sh" ]
+ENTRYPOINT [ "sh", "/start.sh" ]
 ENV SERVER_VERSION=${SERVER_VERSION}
 WORKDIR /data
 VOLUME /data
