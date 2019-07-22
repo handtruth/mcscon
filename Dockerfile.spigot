@@ -12,6 +12,6 @@ RUN mkdir /server && mkdir /data
 COPY --from=build /spigot/spigot-${SERVER_VERSION}.jar /server/server.jar
 WORKDIR /data
 VOLUME /data
-EXPOSE 25565/tcp 25565/udp 25575/tcp
+EXPOSE 25565/tcp 25565/udp 25575/tcp 8123/tcp
 LABEL maintainer="ktlo@handtruth.com"
 ENTRYPOINT umask 002 && java $JAVA_ARGS -jar /server/server.jar nogui

@@ -9,5 +9,6 @@ ENTRYPOINT [ "sh", "/start.sh" ]
 ENV SERVER_VERSION=${SERVER_VERSION}
 WORKDIR /data
 VOLUME /data
-EXPOSE 25565/tcp 25565/udp 25575/tcp
+#      Default   Query     RCON      Dynmap
+EXPOSE 25565/tcp 25565/udp 25575/tcp 8123/tcp
 LABEL maintainer="ktlo@handtruth.com"
